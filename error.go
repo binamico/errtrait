@@ -1,5 +1,9 @@
 package errtrait
 
+import (
+	"errors"
+)
+
 // Err основная структура ошибки сервера.
 // Эта структура ошибки будет возвращена клиенту.
 type Err struct {
@@ -16,4 +20,14 @@ func (e Err) Error() string {
 // GetTrait возвращает trait ошибки
 func (e Err) GetTrait() Trait {
 	return e.Trait
+}
+
+// HasTrait проверяет, имеется ли у ошибки переданный trait.
+func HasTrait(err error, trait Trait) bool {
+	var traitErr Err
+	if ok := errors.As(err, &traitErr); !ok {
+		return false
+	}
+
+	return traitErr.Trait == trait
 }
