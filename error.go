@@ -7,9 +7,9 @@ import (
 // Err основная структура ошибки сервера.
 // Эта структура ошибки будет возвращена клиенту.
 type Err struct {
-	Message string
-	Code    string
-	Trait   Trait
+	Message string `json:"message"`
+	Code    string `json:"code"`
+	Trait   Trait  `json:"-"`
 }
 
 // Error возвращает сообщение об ошибке
